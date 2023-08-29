@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
+        <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="bkpfService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="bkpf" EntityType="bkpfService.bkpf">
+                    <NavigationPropertyBinding Path="bukrs" Target="bukrs"/>
+                    <NavigationPropertyBinding Path="belnr" Target="belnr"/>
+                    <NavigationPropertyBinding Path="blart" Target="blart"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="bkpf"/>
+                </EntitySet>
+                <EntitySet Name="bukrs" EntityType="bkpfService.bukrs">
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="bukrs"/>
+                </EntitySet>
+                <EntitySet Name="belnr" EntityType="bkpfService.belnr">
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="belnr"/>
+                </EntitySet>
+                <EntitySet Name="blart" EntityType="bkpfService.blart">
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="blart"/>
+                </EntitySet>
+            </EntityContainer>
+            <EntityType Name="bkpf">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="asd" Type="Edm.String" MaxLength="4"/>
+                <NavigationProperty Name="bukrs" Type="Collection(bkpfService.bukrs)"/>
+                <Property Name="bukrs_ID" Type="Edm.Guid"/>
+                <Property Name="buktx" Type="Edm.String" MaxLength="10"/>
+                <NavigationProperty Name="belnr" Type="bkpfService.belnr"/>
+                <Property Name="gjahr" Type="Edm.String" MaxLength="4"/>
+                <NavigationProperty Name="blart" Type="bkpfService.blart">
+                    <ReferentialConstraint Property="blart_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="blart_ID" Type="Edm.Guid"/>
+                <Property Name="bldat" Type="Edm.DateTimeOffset"/>
+                <Property Name="budat" Type="Edm.DateTimeOffset"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="bkpfService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="bkpfService.bkpf"/>
+            </EntityType>
+            <EntityType Name="bukrs">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="bukrs" Type="Edm.String" MaxLength="4"/>
+                <Property Name="buktx" Type="Edm.String" MaxLength="20"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="bkpfService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="bkpfService.bukrs"/>
+            </EntityType>
+            <EntityType Name="belnr">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="belnr" Type="Edm.String" MaxLength="10"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="bkpfService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="bkpfService.belnr"/>
+            </EntityType>
+            <EntityType Name="blart">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="blart" Type="Edm.String" MaxLength="2"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="bkpfService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="bkpfService.blart"/>
+            </EntityType>
+            <EntityType Name="DraftAdministrativeData">
+                <Key>
+                    <PropertyRef Name="DraftUUID"/>
+                </Key>
+                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="InProcessByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean"/>
+            </EntityType>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="bkpfService.bkpf"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="bkpfService.bkpf"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="bkpfService.bukrs"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="bkpfService.bukrs"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="bkpfService.belnr"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="bkpfService.belnr"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="bkpfService.blart"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="bkpfService.blart"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="bkpfService.bkpf"/>
+                <ReturnType Type="bkpfService.bkpf"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="bkpfService.bukrs"/>
+                <ReturnType Type="bkpfService.bukrs"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="bkpfService.belnr"/>
+                <ReturnType Type="bkpfService.belnr"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="bkpfService.blart"/>
+                <ReturnType Type="bkpfService.blart"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="bkpfService.bkpf"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="bkpfService.bkpf"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="bkpfService.bukrs"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="bkpfService.bukrs"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="bkpfService.belnr"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="bkpfService.belnr"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="bkpfService.blart"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="bkpfService.blart"/>
+            </Action>
+            <Annotations Target="bkpfService.bkpf">
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="TypeName" String="Copmany"/>
+                        <PropertyValue Property="TypeNamePlural" String="Copmany"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="bukrs_ID"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="bukrs_ID"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>bukrs_ID</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="bukrs_ID"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="budat"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="bldat"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="bkpfService.EntityContainer/bkpf">
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="bkpfService.draftActivate"/>
+                        <PropertyValue Property="EditAction" String="bkpfService.draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="bkpfService.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="bkpfService.bkpf/createdAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                </Annotations>
+                <Annotations Target="bkpfService.bkpf/createdBy">
+                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                    <Annotation Term="Core.Immutable" Bool="true"/>
+                    <Annotation Term="Core.Computed" Bool="true"/>
+                    <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                        </Annotations>
+                        <Annotations Target="bkpfService.bkpf/modifiedAt">
+                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                            <Annotation Term="Core.Computed" Bool="true"/>
+                            <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                            </Annotations>
+                            <Annotations Target="bkpfService.bkpf/modifiedBy">
+                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                <Annotation Term="Core.Computed" Bool="true"/>
+                                <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                    <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                    </Annotations>
+                                    <Annotations Target="bkpfService.bkpf/ID">
+                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                    </Annotations>
+                                    <Annotations Target="bkpfService.bkpf/bukrs">
+                                        <Annotation Term="Common.Label" String="Company Code"/>
+                                    </Annotations>
+                                    <Annotations Target="bkpfService.bkpf/bukrs_ID">
+                                        <Annotation Term="Common.Label" String="Company Code"/>
+                                    </Annotations>
+                                    <Annotations Target="bkpfService.bkpf/buktx">
+                                        <Annotation Term="Common.Label" String="Description"/>
+                                    </Annotations>
+                                    <Annotations Target="bkpfService.bkpf/belnr">
+                                        <Annotation Term="Common.Label" String="Document Number"/>
+                                    </Annotations>
+                                    <Annotations Target="bkpfService.bkpf/gjahr">
+                                        <Annotation Term="Common.Label" String="Fiscal Year"/>
+                                    </Annotations>
+                                    <Annotations Target="bkpfService.bkpf/blart">
+                                        <Annotation Term="Common.Label" String="Document Type"/>
+                                    </Annotations>
+                                    <Annotations Target="bkpfService.bkpf/blart_ID">
+                                        <Annotation Term="Common.Label" String="Document Type"/>
+                                    </Annotations>
+                                    <Annotations Target="bkpfService.bkpf/bldat">
+                                        <Annotation Term="Common.Label" String="Document Date"/>
+                                        <Annotation Term="Validation.Minimum" String="2018-01-01"/>
+                                        <Annotation Term="Validation.Maximum" String="2024-01-01"/>
+                                    </Annotations>
+                                    <Annotations Target="bkpfService.bkpf/budat">
+                                        <Annotation Term="Common.Label" String="Posting Date"/>
+                                        <Annotation Term="Validation.Minimum" String="2018-01-01"/>
+                                        <Annotation Term="Validation.Maximum" String="2024-01-01"/>
+                                    </Annotations>
+                                    <Annotations Target="bkpfService.bkpf/IsActiveEntity">
+                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                    </Annotations>
+                                    <Annotations Target="bkpfService.bkpf/HasActiveEntity">
+                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                    </Annotations>
+                                    <Annotations Target="bkpfService.bkpf/HasDraftEntity">
+                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                    </Annotations>
+                                    <Annotations Target="bkpfService.bkpf/DraftAdministrativeData">
+                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                    </Annotations>
+                                    <Annotations Target="bkpfService.EntityContainer/bukrs">
+                                        <Annotation Term="Common.DraftRoot">
+                                            <Record Type="Common.DraftRootType">
+                                                <PropertyValue Property="ActivationAction" String="bkpfService.draftActivate"/>
+                                                <PropertyValue Property="EditAction" String="bkpfService.draftEdit"/>
+                                                <PropertyValue Property="PreparationAction" String="bkpfService.draftPrepare"/>
+                                            </Record>
+                                        </Annotation>
+                                    </Annotations>
+                                    <Annotations Target="bkpfService.bukrs/createdAt">
+                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                        <Annotation Term="Core.Immutable" Bool="true"/>
+                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                        </Annotations>
+                                        <Annotations Target="bkpfService.bukrs/createdBy">
+                                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                            <Annotation Term="Core.Immutable" Bool="true"/>
+                                            <Annotation Term="Core.Computed" Bool="true"/>
+                                            <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                </Annotations>
+                                                <Annotations Target="bkpfService.bukrs/modifiedAt">
+                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                    <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                    </Annotations>
+                                                    <Annotations Target="bkpfService.bukrs/modifiedBy">
+                                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                            <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                            </Annotations>
+                                                            <Annotations Target="bkpfService.bukrs/ID">
+                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                            </Annotations>
+                                                            <Annotations Target="bkpfService.bukrs/bukrs">
+                                                                <Annotation Term="Common.Label" String="Company Code"/>
+                                                            </Annotations>
+                                                            <Annotations Target="bkpfService.bukrs/IsActiveEntity">
+                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                            </Annotations>
+                                                            <Annotations Target="bkpfService.bukrs/HasActiveEntity">
+                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                            </Annotations>
+                                                            <Annotations Target="bkpfService.bukrs/HasDraftEntity">
+                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                            </Annotations>
+                                                            <Annotations Target="bkpfService.bukrs/DraftAdministrativeData">
+                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                            </Annotations>
+                                                            <Annotations Target="bkpfService.EntityContainer/belnr">
+                                                                <Annotation Term="Common.DraftRoot">
+                                                                    <Record Type="Common.DraftRootType">
+                                                                        <PropertyValue Property="ActivationAction" String="bkpfService.draftActivate"/>
+                                                                        <PropertyValue Property="EditAction" String="bkpfService.draftEdit"/>
+                                                                        <PropertyValue Property="PreparationAction" String="bkpfService.draftPrepare"/>
+                                                                    </Record>
+                                                                </Annotation>
+                                                            </Annotations>
+                                                            <Annotations Target="bkpfService.belnr/createdAt">
+                                                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                                                </Annotations>
+                                                                <Annotations Target="bkpfService.belnr/createdBy">
+                                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                    <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                                    <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                                        </Annotations>
+                                                                        <Annotations Target="bkpfService.belnr/modifiedAt">
+                                                                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                            <Annotation Term="Core.Computed" Bool="true"/>
+                                                                            <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                                            </Annotations>
+                                                                            <Annotations Target="bkpfService.belnr/modifiedBy">
+                                                                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                    <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="bkpfService.belnr/ID">
+                                                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="bkpfService.belnr/belnr">
+                                                                                        <Annotation Term="Common.Label" String="Document Number"/>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="bkpfService.belnr/IsActiveEntity">
+                                                                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="bkpfService.belnr/HasActiveEntity">
+                                                                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="bkpfService.belnr/HasDraftEntity">
+                                                                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="bkpfService.belnr/DraftAdministrativeData">
+                                                                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="bkpfService.EntityContainer/blart">
+                                                                                        <Annotation Term="Common.DraftRoot">
+                                                                                            <Record Type="Common.DraftRootType">
+                                                                                                <PropertyValue Property="ActivationAction" String="bkpfService.draftActivate"/>
+                                                                                                <PropertyValue Property="EditAction" String="bkpfService.draftEdit"/>
+                                                                                                <PropertyValue Property="PreparationAction" String="bkpfService.draftPrepare"/>
+                                                                                            </Record>
+                                                                                        </Annotation>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="bkpfService.blart/createdAt">
+                                                                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                        <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                                                                        </Annotations>
+                                                                                        <Annotations Target="bkpfService.blart/createdBy">
+                                                                                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                            <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                            <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                            <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                                                                </Annotations>
+                                                                                                <Annotations Target="bkpfService.blart/modifiedAt">
+                                                                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                    <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                                                                    </Annotations>
+                                                                                                    <Annotations Target="bkpfService.blart/modifiedBy">
+                                                                                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                            <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                                                                            </Annotations>
+                                                                                                            <Annotations Target="bkpfService.blart/ID">
+                                                                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                            </Annotations>
+                                                                                                            <Annotations Target="bkpfService.blart/blart">
+                                                                                                                <Annotation Term="Common.Label" String="Document Type"/>
+                                                                                                            </Annotations>
+                                                                                                            <Annotations Target="bkpfService.blart/IsActiveEntity">
+                                                                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                                            </Annotations>
+                                                                                                            <Annotations Target="bkpfService.blart/HasActiveEntity">
+                                                                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                                            </Annotations>
+                                                                                                            <Annotations Target="bkpfService.blart/HasDraftEntity">
+                                                                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                                            </Annotations>
+                                                                                                            <Annotations Target="bkpfService.blart/DraftAdministrativeData">
+                                                                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                                            </Annotations>
+                                                                                                            <Annotations Target="bkpfService.DraftAdministrativeData">
+                                                                                                                <Annotation Term="Common.Label" String="{i18n>Draft_DraftAdministrativeData}"/>
+                                                                                                                </Annotations>
+                                                                                                                <Annotations Target="bkpfService.DraftAdministrativeData/DraftUUID">
+                                                                                                                    <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                                                    <Annotation Term="Common.Label" String="{i18n>Draft_DraftUUID}"/>
+                                                                                                                    </Annotations>
+                                                                                                                    <Annotations Target="bkpfService.DraftAdministrativeData/CreationDateTime">
+                                                                                                                        <Annotation Term="Common.Label" String="{i18n>Draft_CreationDateTime}"/>
+                                                                                                                        </Annotations>
+                                                                                                                        <Annotations Target="bkpfService.DraftAdministrativeData/CreatedByUser">
+                                                                                                                            <Annotation Term="Common.Label" String="{i18n>Draft_CreatedByUser}"/>
+                                                                                                                            </Annotations>
+                                                                                                                            <Annotations Target="bkpfService.DraftAdministrativeData/DraftIsCreatedByMe">
+                                                                                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                                                                <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsCreatedByMe}"/>
+                                                                                                                                </Annotations>
+                                                                                                                                <Annotations Target="bkpfService.DraftAdministrativeData/LastChangeDateTime">
+                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>Draft_LastChangeDateTime}"/>
+                                                                                                                                    </Annotations>
+                                                                                                                                    <Annotations Target="bkpfService.DraftAdministrativeData/LastChangedByUser">
+                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>Draft_LastChangedByUser}"/>
+                                                                                                                                        </Annotations>
+                                                                                                                                        <Annotations Target="bkpfService.DraftAdministrativeData/InProcessByUser">
+                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>Draft_InProcessByUser}"/>
+                                                                                                                                            </Annotations>
+                                                                                                                                            <Annotations Target="bkpfService.DraftAdministrativeData/DraftIsProcessedByMe">
+                                                                                                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsProcessedByMe}"/>
+                                                                                                                                                </Annotations>
+                                                                                                                                            </Schema>
+                                                                                                                                        </edmx:DataServices>
+                                                                                                                                    </edmx:Edmx>

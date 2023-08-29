@@ -4,7 +4,7 @@ annotate RiskService.Risks with {
 	title       @title: 'Title';
 	prio        @title: 'Priority';
 	descr       @title: 'Description';
-	miti        @title: 'Mitigation1';
+	miti        @title: 'Mitigation';
 	impact      @title: 'Impact';
 }
 
